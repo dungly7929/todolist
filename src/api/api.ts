@@ -4,11 +4,10 @@ const baseUrl = 'http://localhost:3001';
 
 export const getAllTodos = async (): Promise<ITask[]> => { 
     const res = await fetch(`${baseUrl}/tasks`, { cache: 'no-store' });
-    const todos = await res.json();
-    return todos;
+    return await res.json();
 }
 
-export const addTodo = async (todo: ITask): Promise<ITask> => {
+export const addTodoApi = async (todo: ITask): Promise<ITask> => {
     const res = await fetch(`${baseUrl}/tasks`, 
     {
         method: 'POST',
@@ -17,11 +16,10 @@ export const addTodo = async (todo: ITask): Promise<ITask> => {
         },
         body: JSON.stringify(todo)
     })
-    const newTodo = await res.json();;
-    return newTodo;
+    return await res.json();
 }
 
-export const editTodo = async (todo: ITask): Promise<ITask> => {
+export const editTodoApi = async (todo: ITask): Promise<ITask> => {
     const res = await fetch(`${baseUrl}/tasks/${todo.id}`, 
     {
         method: 'PUT',
@@ -30,12 +28,11 @@ export const editTodo = async (todo: ITask): Promise<ITask> => {
         },
         body: JSON.stringify(todo)
     })
-    const updateTodo = await res.json();;
-    return updateTodo;
+    return await res.json();
 }
 
 
-export const editDoneTodo = async (todo: ITask): Promise<ITask> => {
+export const editCompletedTodoApi = async (todo: ITask): Promise<ITask> => {
 
     const res = await fetch(`${baseUrl}/tasks/${todo.id}`, 
     {
@@ -45,11 +42,10 @@ export const editDoneTodo = async (todo: ITask): Promise<ITask> => {
         },
         body: JSON.stringify(todo)
     })
-    const updateDoneTodo = await res.json();;
-    return updateDoneTodo;
+    return await res.json();
 }
 
-export const deleteTodo = async (id: string): Promise<void> => {
+export const deleteTodoApi = async (id: string): Promise<void> => {
     await fetch(`${baseUrl}/tasks/${id}`, 
     {
         method: 'DELETE',
