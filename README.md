@@ -2,19 +2,31 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+1) run the development server:
 
 ```bash
-npm run dev
-# or
+yarn
+```
+2)
+```bash
+npm i json-server
+```
+
+after that run
+
+```bash
+ npm run json-server
+```
+
+3) run the development server:
+
+```bash
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Open [http://localhost:3000](http://localhost:3001) with your browser to see the api of the JSon Server.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
