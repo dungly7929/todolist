@@ -12,10 +12,6 @@ import Task from "../Task";
 import { Button } from "../ui/button";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import {
-  completedTasksFilter,
-  selectCompletedTasks,
-} from "@/redux/slice/slice";
 
 interface TodoListProps {
   tasks: ITask[];
@@ -23,7 +19,6 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = () => {
   const tasks = useSelector((state: RootState) => state.list.Tasks);
-  const completedTasks = useSelector(selectCompletedTasks);
   const [showCompleted, setShowCompleted] = useState("");
 
   const handleFliterCompleted = () => {

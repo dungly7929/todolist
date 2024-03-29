@@ -9,13 +9,13 @@
     {
       "id": "ec5deeb4-8366-45dd-9756-47326327b105",
       "name": "Learn React",
-      "completed": false,
+      "completed": true,
       "priority": "Medium"
     },
     {
       "id": "7f064bdc-bb2e-4702-9ff1-7d13c43f82b2",
       "name": "Learn Angular",
-      "completed": false,
+      "completed": true,
       "priority": "Medium"
     },
     {
@@ -33,13 +33,19 @@
     {
       "id": "aa8bf17d-8635-49fe-b1a0-f387610aae36",
       "name": "Learn Swing",
-      "completed": false,
+      "completed": true,
       "priority": "Medium"
     },
     {
       "id": "1e27dacf-f02e-44ea-84b0-95f85bb159a3",
       "name": "Learn Jumo",
       "completed": true,
+      "priority": "Medium"
+    },
+    {
+      "id": "0efd5692-e65a-41db-abf8-2c725e545c52",
+      "name": "Learn English",
+      "completed": false,
       "priority": "Medium"
     }
   ]
