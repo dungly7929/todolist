@@ -1,24 +1,46 @@
 {
   "tasks": [
     {
-      "id": "d5cd476c-2f34-4e5d-bb07-64a0d6810913",
-      "text": "cacaa",
-      "done": true
+      "id": "13f6b580-f7ae-488a-8a67-aff72a9db668",
+      "name": "Learn JavaScript",
+      "completed": true,
+      "priority": "Medium"
     },
     {
-      "id": "887b5a0e-f065-4dff-b565-cfce7a52ad11",
-      "text": "dsadsadas",
-      "done": true
+      "id": "ec5deeb4-8366-45dd-9756-47326327b105",
+      "name": "Learn React",
+      "completed": false,
+      "priority": "Medium"
     },
     {
-      "id": "9a5055ec-a23b-45db-9685-cac7f6a9b65a",
-      "text": "dsadasdsadsad",
-      "done": false
+      "id": "7f064bdc-bb2e-4702-9ff1-7d13c43f82b2",
+      "name": "Learn Angular",
+      "completed": false,
+      "priority": "Medium"
     },
     {
-      "id": "84101304-59d8-462a-8124-e1cc37b9defb",
-      "text": "21321edsadsa",
-      "done": false
+      "id": "8ff5b3c8-be47-41bb-ad2e-992f19211d3f",
+      "name": "Learn Nextjs",
+      "completed": false,
+      "priority": "Medium"
+    },
+    {
+      "id": "1fb6c49f-3553-433b-9f2a-782c43c9286b",
+      "name": "Learn Learn 5",
+      "completed": false,
+      "priority": "Medium"
+    },
+    {
+      "id": "aa8bf17d-8635-49fe-b1a0-f387610aae36",
+      "name": "Learn Swing",
+      "completed": false,
+      "priority": "Medium"
+    },
+    {
+      "id": "1e27dacf-f02e-44ea-84b0-95f85bb159a3",
+      "name": "Learn Jumo",
+      "completed": true,
+      "priority": "Medium"
     }
   ]
 }

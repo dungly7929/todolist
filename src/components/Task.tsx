@@ -6,51 +6,61 @@ import { ITask } from "@/types/task";
 import { FiEdit, FiTrash } from "react-icons/fi";
 import { Button } from "./ui/button";
 import Modal from "./Modal";
-import { useRouter } from "next/navigation";
-import { deleteTodo, editDoneTodo, editTodo } from "@/api/api";
+import { deleteTodoApi, editCompletedTodoApi, editTodoApi } from "@/api/api";
 import { Checkbox } from "./ui/checkbox";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { deleteTodo, editTodo, editCompletedTodo } from "@/redux/slice/slice";
 
 interface TaskProps {
   task: ITask;
 }
 
 const Task: React.FC<TaskProps> = ({ task }) => {
-  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
   const [modalEditOpen, setModalEditOpen] = useState<boolean>(false);
   const [openModelDelete, setOpenModelDelete] = useState<boolean>(false);
-  const [checked, setChecked] = useState<boolean>(task.done);
-  const [taskToEdit, setTasktoEdit] = useState<string>(task.text);
+  const [checked, setChecked] = useState<boolean>(task.completed);
+  const [taskToEdit, setTasktoEdit] = useState<string>(task.name);
 
+  //Handle logic for editing a task
   const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await editTodo({
+
+    const editedTodo = await editTodoApi({
       id: task.id,
-      text: taskToEdit,
-      done: task.done,
+      name: taskToEdit,
+      completed: task.completed,
+      priority: task.priority,
     });
+
+    dispatch(editTodo(editedTodo));
+
     setTasktoEdit("");
     setModalEditOpen(false);
-    router.refresh();
   };
 
+  //Handle logic for deleting a task
   const handleSubmitDeleteTodo = async (id: string) => {
-    await deleteTodo(id);
+    await deleteTodoApi(id);
+    dispatch(deleteTodo(id));
+
     setOpenModelDelete(false);
-    router.refresh();
   };
 
-  const handleSubmitDoneTodo = async (done: boolean) => {
-    await editDoneTodo({
-      id: task.id,
-      text: task.text,
-      done: done!,
-    });
+  //Handle logic for filter completed tasks.
+  const handleSubmitCompletedTodo = async (todo: ITask) => {
+    const updatedTask = await editCompletedTodoApi(todo);
+    // Dispatch an action to update the task in the Redux store
+    dispatch(editCompletedTodo(updatedTask));
   };
 
   return (
     <TableRow key={task.id} className="">
-      <TableCell className={checked ? "text-red-500 line-through" : "w-full"}>
-        {task.text}
+      <TableCell
+        className={checked ? "text-red-500 line-through w-full" : "w-full"}
+      >
+        {task.name}
       </TableCell>
       <TableCell className="flex gap-2">
         {/* Edit Model */}
@@ -102,8 +112,10 @@ const Task: React.FC<TaskProps> = ({ task }) => {
             checked={checked}
             id="done"
             onCheckedChange={() => {
-              setChecked(!checked);
-              handleSubmitDoneTodo(!checked);
+              const newChecked = !checked;
+              const updatedTask = { ...task, completed: !checked };
+              handleSubmitCompletedTodo(updatedTask);
+              setChecked(newChecked);
             }}
           />
         </div>

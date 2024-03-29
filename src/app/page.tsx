@@ -1,22 +1,16 @@
 import { getAllTodos } from "@/api/api";
 import AddTask from "@/components/AddTask";
-import TodoList from "@/components/TodoList";
-import store from "@/redux/store";
-import { Provider } from "react-redux";
+import TodoList from "@/components/TodoList/TodoList";
 
 export default async function Home() {
   const tasks = await getAllTodos();
-
   return (
-    <Provider store={store}>
-      <main className="max-w-4xl mx-auto mt-4">
-        <div className="text-center my-5 flex flex-col gap-4">
-          <h1 className="text-2xl font-bold">Todo List App</h1>
-          <AddTask />
-        </div>
-        <TodoList tasks={tasks} />
-      </main>
-    </Provider>
-
+    <main className="max-w-4xl mx-auto mt-4">
+      <div className="text-center my-5 flex flex-col gap-4">
+        <h1 className="text-2xl font-bold">Todo List App</h1>
+        <AddTask />
+      </div>
+      <TodoList tasks={tasks} />
+    </main>
   );
 }

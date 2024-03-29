@@ -1,33 +1,45 @@
 "use client";
 
-import React, { FormEventHandler, useState } from "react";
+import React, { FormEventHandler, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import Modal from "./Modal";
-import { addTodo, getAllTodos } from "@/api/api";
-import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { AiOutlinePlus } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "@/redux/store";
+import { addTodo, fetchTodos } from "@/redux/slice/slice";
+import { addTodoApi } from "@/api/api";
 
 const AddTask = () => {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [newTask, setNewTask] = useState("");
-  const router = useRouter();
+  const dispatch = useDispatch<AppDispatch>();
+
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
 
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    const todos = await getAllTodos();
-
-    await addTodo({
+    const newTodo = {
       id: uuidv4(),
-      text: newTask,
-      done: false,
-    });
+      name: newTask,
+      completed: false,
+      priority: "Medium",
+    };
+
+    //Add the new todo to the API
+    const addedTodo = await addTodoApi(newTodo);
+
+    dispatch(addTodo(addedTodo));
     setNewTask("");
     setModalOpen(false);
-    router.refresh();
   };
 
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewTask(e.target.value);
+  };
   const btn = (
     <Button
       className="w-full uppercase"
@@ -53,7 +65,7 @@ const AddTask = () => {
           <div className="flex gap-2 mt-5">
             <input
               value={newTask}
-              onChange={(e) => setNewTask(e.target.value)}
+              onChange={handleOnChange}
               type="text"
               placeholder="Add new task here"
               className="input input-bordered w-full"
